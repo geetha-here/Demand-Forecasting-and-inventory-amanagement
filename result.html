@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast Results</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <div class="results-container">
+        <h2>Forecast & Optimization Results</h2>
+
+        <div class="forecast-tables">
+            <h3>Forecast Data</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        {% for column in forecasts %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in forecasted_sales %}
+                    <tr>
+                        <td>{{ row['index'] }}</td>
+                        {% for column in forecasts %}
+                        <td>{{ row[column] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Optimized Production Plan</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        {% for column in forecasts %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in optimized_plan %}
+                    <tr>
+                        <td>{{ row['index'] }}</td>
+                        {% for column in forecasts %}
+                        <td>{{ row[column] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Demand Forecast</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        {% for column in forecasts %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in forecasted_demand %}
+                    <tr>
+                        <td>{{ row['index'] }}</td>
+                        {% for column in forecasts %}
+                        <td>{{ row[column] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Forecast Visualizations</h3>
+        <div class="plots">
+            <h4>Demand Forecast Visualizations</h4>
+            {% for column in forecasts %}
+            <img src="/static/forecasts/{{ column }}_demand_forecast.png" alt="Demand Forecast for {{ column }}"> {% endfor %}
+
+            <h4>Bar Charts</h4>
+            <img src="/static/forecasts/Type of Cloth Purchased_bar.png" alt="Type of Cloth Purchased Bar">
+            <img src="/static/forecasts/Material of the Cloth_bar.png" alt="Material of the Cloth Bar">
+        </div>
+    </div>
+</body>
+
+</html>
